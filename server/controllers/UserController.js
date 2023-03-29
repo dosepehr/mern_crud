@@ -23,3 +23,19 @@ export const createUser = async (req, res) => {
         console.log(err);
     }
 };
+
+export const updateUser = async (req, res) => {
+    try {
+        let editedUser = await User.findByIdAndUpdate(
+            req.headers.authorization,
+            {
+                name: req.body.name,
+                email: req.body.email,
+                gender: req.body.gender,
+            }
+        );
+        res.json(editedUser);
+    } catch (err) {
+        console.log(err);
+    }
+};
