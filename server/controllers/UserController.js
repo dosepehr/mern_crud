@@ -23,7 +23,7 @@ export const createUser = async (req, res) => {
         console.log(err);
     }
 };
-
+// ! updating user
 export const updateUser = async (req, res) => {
     try {
         let editedUser = await User.findByIdAndUpdate(
@@ -35,6 +35,18 @@ export const updateUser = async (req, res) => {
             }
         );
         res.json(editedUser);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// ! deleting user
+export const deleteUser = async (req, res) => {
+    try {
+        const deletedUser = await User.findByIdAndDelete(
+            req.headers.authorization
+        );
+        res.json(deletedUser);
     } catch (err) {
         console.log(err);
     }
