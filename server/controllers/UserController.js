@@ -9,6 +9,19 @@ export const getUsers = async (req, res) => {
         console.log(err);
     }
 };
+
+// ! getting one User
+export const getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.headers.authorization)
+        res.send(user)
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+
 // ! creating new user
 export const createUser = async (req, res) => {
     try {
