@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const UsersList = () => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -11,6 +12,14 @@ const UsersList = () => {
     }, []);
     return (
         <>
+            <div className='flex items-center justify-center my-5'>
+                <Link
+                    to='/add'
+                    className='bg-pink-500 hover:bg-pink-500 duration-200 text-white px-4 py-2'
+                >
+                    افزودن
+                </Link>
+            </div>
             <div className='flex flex-col'>
                 <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
                     <div className='py-2 inline-block min-w-full sm:px-6 lg:px-8'>
@@ -70,8 +79,12 @@ const UsersList = () => {
                                                     {item.gender}
                                                 </td>
                                                 <td className='text-sm text-gray-900 space-x-4 px-6 py-4 whitespace-nowrap'>
-                                                 <button className='px-4 py-2 text-white bg-red-500 hover:bg-red-700 duration-200'>حذف</button>
-                                                 <button className='px-4 py-2 text-white bg-green-500 hover:bg-green-700 duration-200'>ویرایش</button>
+                                                    <button className='px-4 py-2 text-white bg-red-500 hover:bg-red-700 duration-200'>
+                                                        حذف
+                                                    </button>
+                                                    <button className='px-4 py-2 text-white bg-green-500 hover:bg-green-700 duration-200'>
+                                                        ویرایش
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}
