@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-const UsersList = () => {
+const UsersList = ({ setUser }) => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
         const getUsers = async () => {
@@ -16,6 +16,17 @@ const UsersList = () => {
                 Authorization: id,
             },
         });
+    };
+    const editUser = async (id) => {
+        const { data } = await axios.get(
+            'http://localhost:4000/api/users/main',
+            {
+                headers: {
+                    Authorization: id,
+                },
+            }
+        );
+        setUser(data);
     };
     return (
         <>
@@ -94,9 +105,15 @@ const UsersList = () => {
                                                     >
                                                         حذف
                                                     </button>
-                                                    <button className='px-4 py-2 text-white bg-green-500 hover:bg-green-700 duration-200'>
+                                                    <Link
+                                                        to='edit'
+                                                        onClick={() => {
+                                                            editUser(item._id);
+                                                        }}
+                                                        className='px-4 py-2 text-white bg-green-500 hover:bg-green-700 duration-200'
+                                                    >
                                                         ویرایش
-                                                    </button>
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         ))}
