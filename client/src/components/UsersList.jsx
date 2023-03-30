@@ -9,7 +9,14 @@ const UsersList = () => {
             setUsers(data);
         };
         getUsers();
-    }, []);
+    }, [users]);
+    const deleteUser = async (id) => {
+        await axios.delete('http://localhost:4000/api/users', {
+            headers: {
+                Authorization: id,
+            },
+        });
+    };
     return (
         <>
             <div className='flex items-center justify-center my-5'>
@@ -79,7 +86,12 @@ const UsersList = () => {
                                                     {item.gender}
                                                 </td>
                                                 <td className='text-sm text-gray-900 space-x-4 px-6 py-4 whitespace-nowrap'>
-                                                    <button className='px-4 py-2 text-white bg-red-500 hover:bg-red-700 duration-200'>
+                                                    <button
+                                                        onClick={() =>
+                                                            deleteUser(item._id)
+                                                        }
+                                                        className='px-4 py-2 text-white bg-red-500 hover:bg-red-700 duration-200'
+                                                    >
                                                         حذف
                                                     </button>
                                                     <button className='px-4 py-2 text-white bg-green-500 hover:bg-green-700 duration-200'>
